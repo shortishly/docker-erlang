@@ -1,37 +1,10 @@
-FROM centos
-MAINTAINER Peter Morgan <peter.james.morgan@gmail.com>
+FROM erlang
 
-ENV ERLANG_VERSION 17.5
-ENV ERLANG_LOCATION /opt/erlang/$ERLANG_VERSION
-
-RUN yum -y update && yum -y install \
-    gcc \
-    make \
-    openssl-devel \
-    ncurses-devel \
-    perl \
-    tar \
-    wget
-
-WORKDIR /root
-
-RUN wget https://raw.githubusercontent.com/spawngrid/kerl/master/kerl
-RUN chmod +x ./kerl
-RUN ./kerl update releases
-
-RUN ./kerl build $ERLANG_VERSION $ERLANG_VERSION
-RUN ./kerl install $ERLANG_VERSION $ERLANG_LOCATION
-RUN ./kerl cleanup all
-RUN rm -f .kerl/archives/*.tar.gz
-
-ENV PATH $ERLANG_LOCATION/bin:$PATH
-
-RUN yum -y erase \
-    gcc \
-    openssl-devel \
-    ncurses-devel \
-    perl \
-    tar \
-    wget
-
-RUN yum clean all
+RUN \
+    apt-get update && \
+    apt-get install -y apt-transport-https ca-certificates && \
+    apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
+    echo "deb https://apt.dockerproject.org/repo debian-jessie main" >/etc/apt/sources.list.d/docker.list && \
+    apt-get update && \
+    apt-cache policy docker-engine && \
+    apt-get install -y docker-engine

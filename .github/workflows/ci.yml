@@ -35,6 +35,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           build-args:
-            OTP_VERSION: ${{matrix.otp}}
+            - OTP_VERSION: ${{matrix.otp}}
           push: true
           tags: ghcr.io/shortishly/docker-erlang:${{matrix.otp}}

@@ -1,4 +1,5 @@
-FROM erlang
+ARG OTP_VERSION=latest
+FROM erlang:${OTP_VERSION}
 
 RUN \
     apt-get update && \

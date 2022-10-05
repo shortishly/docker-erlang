@@ -22,10 +22,10 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-    - name: set up beam
-      uses: erlef/setup-beam@v1
-      with:
-        otp-version: ${{ matrix.version }}
+      - name: set up beam
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ matrix.version }}
       - name: Build and push
         uses: docker/build-push-action@v3
         with:

@@ -34,4 +34,4 @@ jobs:
           build-args:
             OTP_VERSION: ${{ matrix.version }}
           push: true
-          tags: ghcr.io/shortishly/docker-erlang:latest
+          tags: ghcr.io/shortishly/docker-erlang:${{ matrix.version }}

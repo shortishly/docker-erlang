@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - otp: 25.1
+          - otp: 25.2
           - otp: 24.3
     runs-on: ubuntu-latest
     steps:
